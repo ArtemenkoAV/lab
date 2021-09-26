@@ -65,8 +65,8 @@ def getUnit(name):
             newChoice = True
     return unit
 
-def graph(num, title, y, x):
-    pyplot.subplot(2,1, num)
+def graph(title, y, x):
+    pyplot.subplot()
     pyplot.grid(True)
     if title == 'Переходная характеристика':
         pyplot.plot(x, y)
@@ -91,9 +91,9 @@ for i in range(0, 10000):
     timeLine.append(i/100)
 
 [y, x] = matlab.step(unit, timeLine)
-graph(1, 'Переходная характеристика', y, x)
+graph('Переходная характеристика', y, x)
 [y, x] = matlab.impulse(unit, timeLine)
-graph(2, 'Импульсная характеристика', y, x)
+graph('Импульсная характеристика', y, x)
 
 
 time = []
