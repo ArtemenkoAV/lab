@@ -87,7 +87,7 @@ unitName = choise()
 unit = getUnit(unitName)
 
 timeLine = []
-for i in range(0, 10000):
+for i in range(0, 1000):
     timeLine.append(i/100)
 
 [y, x] = matlab.step(unit, timeLine)
@@ -97,12 +97,12 @@ graph(2, 'Импульсная характеристика', y, x)
 
 
 time = []
-for i in range(0, 1000):
-    timeLine.append(i)
+for i in range(0, 250):
+    time.append(i/100)
 pyplot.show()
 pyplot.subplot()
 pyplot.grid(True)
-mag, phase, omega = matlab.freqresp(unit, timeLine)
+mag, phase, omega = matlab.freqresp(unit, time)
 pyplot.plot(mag)
 pyplot.title('АЧХ')
 pyplot.ylabel('Амплитуда')
