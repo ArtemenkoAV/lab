@@ -65,23 +65,20 @@ def getUnit(name):
             newChoice = True
     return unit
 
-def graph(num, title, y, x):
-    pyplot.subplot(2,1, num)
+def graph(title, y, x):
+    pyplot.subplot()
     pyplot.grid(True)
     if title == 'Переходная характеристика':
         pyplot.plot(x, y)
+        pyplot.title(title)
+        pyplot.ylabel('Амплитуда')
+        pyplot.xlabel('Время, (с)')
 
     elif title == 'Импульсная характеристика':
         pyplot.plot(x, y)
-
-
-
-
-
-
-    pyplot.title(title)
-    pyplot.ylabel('Амплитуда')
-    pyplot.xlabel('Время, (с)')
+        pyplot.title(title)
+        pyplot.ylabel('Амплитуда')
+        pyplot.xlabel('Время, (с)')
 
 unitName = choise()
 unit = getUnit(unitName)
@@ -91,15 +88,16 @@ for i in range(0, 1000):
     timeLine.append(i/100)
 
 [y, x] = matlab.step(unit, timeLine)
-graph(1, 'Переходная характеристика', y, x)
+graph('Переходная характеристика', y, x)
+pyplot.show()
 [y, x] = matlab.impulse(unit, timeLine)
-graph(2, 'Импульсная характеристика', y, x)
-
+graph('Импульсная характеристика', y, x)
+pyplot.show()
 
 time = []
 for i in range(0, 250):
     time.append(i/100)
-pyplot.show()
+
 pyplot.subplot()
 pyplot.grid(True)
 mag, phase, omega = matlab.freqresp(unit, time)
@@ -109,7 +107,6 @@ pyplot.ylabel('Амплитуда')
 pyplot.xlabel('угловая частота, (рад/с)')
 pyplot.show()
 
-pyplot.subplot()
 pyplot.grid(True)
 pyplot.title('ФЧХ')
 pyplot.ylabel('Фаза')
